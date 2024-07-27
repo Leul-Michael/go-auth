@@ -1,7 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"log"
+	"os"
+	"os/signal"
+
+	"github.com/Leul-Michael/go-auth/application"
+)
 
 func main() {
-	fmt.Println("Low level IQ")
+	app := application.New()
+
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer cancel()
+
+	err := app.Start(ctx)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }
