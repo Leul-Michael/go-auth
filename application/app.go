@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/Leul-Michael/go-auth/model"
 	"gorm.io/gorm"
 )
 
@@ -22,8 +23,8 @@ func New() (*App, error) {
 		return nil, fmt.Errorf("error: %w", err)
 	}
 
-	// // making migrations
-	// app.DB.AutoMigrate(&model.User{})
+	// making migrations
+	app.DB.AutoMigrate(&model.User{})
 
 	app.loadRoutes()
 
